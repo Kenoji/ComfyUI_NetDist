@@ -168,6 +168,14 @@ class QueueRemote:
 					new_prompt[i]["inputs"]["vae_name"] = new_prompt[i]["inputs"]["vae_name"].replace("\\","/")
 				if new_prompt[i]["class_type"] in ["CheckpointLoader","CheckpointLoaderSimple"]:
 					new_prompt[i]["inputs"]["ckpt_name"] = new_prompt[i]["inputs"]["ckpt_name"].replace("\\","/")
+		elif system == "windows":
+			for i in new_prompt.keys():
+				if new_prompt[i]["class_type"] == "LoraLoader":
+					new_prompt[i]["inputs"]["lora_name"] = new_prompt[i]["inputs"]["lora_name"].replace("/","\\")
+				if new_prompt[i]["class_type"] == "VAELoader":
+					new_prompt[i]["inputs"]["vae_name"] = new_prompt[i]["inputs"]["vae_name"].replace("/","\\")
+				if new_prompt[i]["class_type"] in ["CheckpointLoader","CheckpointLoaderSimple"]:
+					new_prompt[i]["inputs"]["ckpt_name"] = new_prompt[i]["inputs"]["ckpt_name"].replace("/","\\")
 		for i in to_del:
 			del new_prompt[i]
 
